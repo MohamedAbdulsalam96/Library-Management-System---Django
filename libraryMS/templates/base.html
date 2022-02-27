@@ -23,14 +23,12 @@
 {% include "parts/sidebar.html" %}
 {% block content %}
 
-{% endblock  %}
+{% endblock %}
 {% include "parts/footer.html" %}
 </div>
 <!-- ./wrapper -->
-
 <!-- REQUIRED SCRIPTS -->
 <script src="{% static 'plugins/jquery_datepacker/jquery_ui.js' %}"></script>
-
 <!-- jQuery -->
 <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
 <!-- Bootstrap -->
@@ -38,15 +36,15 @@
 <!-- AdminLTE -->
 <script src="{% static 'dist/js/adminlte.js' %}"></script>
 <!-- OPTIONAL SCRIPTS -->
-
 <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
-
 <script src="{% static 'dist/js/demo.js' %}"></script>
 <!--<script src="{% static 'dist/js/pages/dashboard3.js'"></script>
 -->
-
-
 <script>
+  $("#rentaldays").keyup(function(){
+    $("#totalrental").val($("#rentaldays").val()*$("#rentalprice").val())
+  });
+
   {% for book in books %}
   $(".cat{{book.category.id}}").click(function(){
     $(".bookhide").hide()
@@ -57,23 +55,26 @@
     $(".book{{book.status}}").show()
   }); 
   {% endfor %}
+
   $(document).ready(function(){
     var total = 0;
     $('.totalprice').each(function(){
       $('.totalprice').hide()
-      var salary = $('.totalprice').text()
+      var salary = $(this).text()
       total += parseInt(salary)
     });
     $("#totalsalarys").text($("#totalsalarys").text()+total)
   });
   var total1 = 0;
-  $('.totalretal').each(function(){
-    $('.totalretal').hide()
-    var salary1 = $('.totalretal').text()
+  $('.totalrental').each(function(){
+    $(this).hide()
+    var salary1 = $(this).text()
     total1 += parseInt(salary1)
   });
   $(".salaryrental").text(total1)
   $(".salaryrental").hide()
+
+  {% comment %} total2: أرباح الكتب المباعة.. {% endcomment %}
   var total2 = 0;
   $('.totalsold').each(function(){
     $('.totalsold').hide()
@@ -82,9 +83,8 @@
   });
   $(".salarysold").text(total2)
   $(".salarysold").hide()
-  $("#retaldays").keyup(function(){
-    $("#totalretal").val($("#retaldays").val()*$("#retalprice").val())
-  });
+
+
 </script>
 
 

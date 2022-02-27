@@ -1,3 +1,4 @@
+from re import search
 from django.shortcuts import redirect, render, get_object_or_404
 from library.form import *
 from .models import *
@@ -26,9 +27,15 @@ def index(request):         ### Function View of home page
 
 
 def books(request):     ### Function View of books page
+    search = Book.objects.all()
+    title = None
+    if 'search_name' in request.GET:
+        title = request.GET['search_name'] 
+        if title: 
+            search = search.filter(title__icontains=title)
     context = {
         'cate': Category.objects.all(),
-        'books': Book.objects.all(),
+        'books': search,
     }
     return render(request,'pages/books.html', context)
 

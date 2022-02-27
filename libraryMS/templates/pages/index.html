@@ -40,25 +40,25 @@
             <!-- /.card -->
           </div>
           <!-- /.col-md-6 -->
-          {% for book in books %}
-          {% if book.price != None %}
-          {% if book.status == 'sold' %}
-            <p class="totalprice">{{book.price}}  </p>
+            <!-- دوارة: "البوكس حق "اجمالي عدد الكتب & الشكل الدائري الاحصائي..-->
+          {% for book in books %} <!--دوارة لجلب قيم "الكتب المباعة&المستأجرة || (استخدم الجافا اسكربت) -->
+          {% if book.price != None %}            <!--شرط أجيب به قيم الكتب المباعة -->
+            {% if book.status == 'sold' %}
+              <p class="totalprice">{{book.price}}</p>
+            {% endif %}
           {% endif %}
-          {% endif %}
-          {% if book.total_retal != None %}
-          {% if book.status == 'rental' %}
-            <p class="totalprice">{{book.total_retal}}</p>
-          
-          {% endif %}
+          {% if book.total_rental != None %}     <!--شرط أجيب به قيم الكتب المستأجرة.. -->
+            {% if book.status == 'rental' %}
+              <p class="totalprice">{{book.total_rental}}</p>          
+            {% endif %}
           {% endif %}
           {% endfor %}
 
-          <!--دوراة الكتب المستعارة -->
+          <!--دوراة البوكس الخاص بالاحصائيات حق الكتب المباعة والمستأجرة..ة -->
           {% for book in books %}
           {% if book.status == 'rental' %}
-          {% if book.total_retal != None %}
-            <p class="totalretal"> {{book.total_retal}} </p>          
+          {% if book.total_rental != None %}
+            <p class="totalrental"> {{book.total_rental}} </p>          
           {% endif %}
           {% endif %}          
           {% endfor %}
@@ -204,8 +204,8 @@
                       {% if book.price %}
                       <h5 class="description-header">${{book.price}}</h5>
                       <span class="description-text">السعر</span>
-                      {% elif book.retal_price_day %}
-                      <h5 class="description-header">${{book.retal_price_day}}</h5>
+                      {% elif book.rental_price_day %}
+                      <h5 class="description-header">${{book.rental_price_day}}</h5>
                       <span class="description-text">في اليوم</span>
                       {% endif %}
                     </div>
