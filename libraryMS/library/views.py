@@ -16,6 +16,11 @@ def index(request):         ### Function View of home page
         'books': Book.objects.all(),
         'form': BookForm(),
         'formcate': CateForm(),
+        'allbook': Book.objects.filter(active=True).count(),
+        'booksold': Book.objects.filter(status='sold').count(),
+        'bookrental': Book.objects.filter(status='rental').count(),
+        'bookavailble': Book.objects.filter(status='availble').count(),
+
     }
     return render(request,'pages/index.html', context )
 
